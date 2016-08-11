@@ -5,8 +5,9 @@ url = ARGV.shift
 redis = Redis.new(:url => url)
 
 key = 0
+data = 'x' * (1024*1024)
 50.times do
-	redis.set key, "x" * (1024*1024)
+	redis.set key, data
 	mem = redis.info['used_memory'].to_i
 	puts "%.1f MB" % (mem / 1024.0 / 1024)
 	key += 1
